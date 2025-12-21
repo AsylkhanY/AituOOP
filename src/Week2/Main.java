@@ -18,6 +18,5 @@ public class Main {
         System.out.println(product);
 
         System.out.println(sale);
-
     }
 }

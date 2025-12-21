@@ -6,7 +6,6 @@ public class Product {
     private boolean inStock;
     private int price;
 
-
     public Product(int id, String name, boolean inStock, int price){
         this.id = id;
         this.name = name;

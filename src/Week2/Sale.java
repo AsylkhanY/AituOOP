@@ -66,4 +66,5 @@ public class Sale {
         output += "}\nCustomer's name:" + customerName + " Cost:" + getCost();
         return output;
     }
+
 }
