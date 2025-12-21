@@ -13,6 +13,13 @@ public class Product {
         this.price = price;
     }
 
+    public Product() {
+        this.id = 0;
+        this.name = "Empty Product";
+        this.inStock = false;
+        this.price = 0;
+    }
+
     public int getId(){return id;}
 
     public void setId(int id){this.id = id;}

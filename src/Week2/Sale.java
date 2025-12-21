@@ -53,7 +53,7 @@ public class Sale {
         if (bonusAdded) {
             return;
         }
-        bonus += getCost() * bonusRate;
+        bonus += getCost() * bonusRate / 100;
         bonusAdded = true;
     }
 
