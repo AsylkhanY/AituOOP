@@ -27,11 +27,25 @@ public class Sale {
 
     public String getCustomerName(){return customerName;}
 
-    public void setCustomerName(String customerName){this.customerName = customerName;}
+    public void setCustomerName(String customerName){
+        if(!customerName.isEmpty()) {
+            this.customerName = customerName;
+        }
+        else{
+            System.out.println("Warning! Name can not be empty");
+        }
+    }
 
     public int getBonus(){return bonus;}
 
-    public void setBonus(int bonus){this.bonus = bonus;}
+    public void setBonus(int bonus){
+        if(bonus >= 0) {
+            this.bonus = bonus;
+        }
+        else{
+            System.out.println("Warning! Bonus can not be negative");
+        }
+    }
 
     public int getCost(){
         if(cost == 0) {
@@ -51,6 +65,10 @@ public class Sale {
 
     public void addBonus(double bonusRate) {
         if (bonusAdded) {
+            return;
+        }
+        if(bonusRate < 0){
+            System.out.println("Warning! Bonus rate can not be negative");
             return;
         }
         bonus += getCost() * bonusRate / 100;

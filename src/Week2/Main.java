@@ -44,7 +44,7 @@ public class Main {
 
         System.out.println("--- TESTING ADDITIONAL METHODS ---");
         System.out.println("Salary after 10% tax: " + emp1.getSalaryAfterTax(10));
-        emp1.addBonus(5); // 5% bonus
+        emp1.addBonus(5);
         System.out.println("Salary after 5% bonus: " + emp1.getSalary());
 
         System.out.println("Discount amount on " + prod1.getName() + ": " + prod1.getDiscountAmount(10));

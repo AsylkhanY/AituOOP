@@ -21,11 +21,25 @@ public class Employee {
 
     public String getName(){return name;}
 
-    public void setJobPosition(JobPosition jobPosition){this.jobPosition = jobPosition;}
+    public void setJobPosition(JobPosition jobPosition){
+        if(jobPosition != JobPosition.None) {
+            this.jobPosition = jobPosition;
+        }
+        else{
+            System.out.println("Warning! You can not set job position as NONE");
+        }
+    }
 
     public JobPosition getJobPosition(){return jobPosition;}
 
-    public void setSalary(int salary){this.salary = salary;}
+    public void setSalary(int salary){
+        if(salary > 0) {
+            this.salary = salary;
+        }
+        else{
+            System.out.println("Warning! You can not set negative or zero salary");
+        }
+    }
 
     public int getSalary(){return salary;}
 
@@ -41,7 +55,8 @@ public class Employee {
         Janitor,
         Cashier,
         Manager,
-        Security
+        Security,
+        None
     }
 
     @Override

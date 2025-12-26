@@ -26,7 +26,14 @@ public class Product {
 
     public String getName(){return name;}
 
-    public void setName(String name){this.name = name;}
+    public void setName(String name){
+        if(!name.isEmpty()) {
+            this.name = name;
+        }
+        else{
+            System.out.println("Warning! Name can not be empty");
+        }
+    }
 
     public boolean isInStock(){return inStock;}
 
@@ -34,7 +41,14 @@ public class Product {
 
     public int getPrice(){return price;}
 
-    public void setPrice(int price){this.price = price;}
+    public void setPrice(int price){
+        if(price > 0) {
+            this.price = price;
+        }
+        else{
+            System.out.println("Warning! Name can not be negative or zero");
+        }
+    }
 
     public float getPriceAfterDiscount(int discountPercent){
         return price - getDiscountAmount(discountPercent);
