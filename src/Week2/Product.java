@@ -25,7 +25,6 @@ public class Product {
         if(name != null && !name.isEmpty()) {
             this.name = name;
         } else {
-            System.out.println("Warning! Name cannot be empty. Setting to Unknown.");
             this.name = "Unknown";
         }
     }
@@ -38,13 +37,12 @@ public class Product {
         if(price >= 0) {
             this.price = price;
         } else {
-            System.out.println("Warning! Price cannot be negative. Setting to 0.");
             this.price = 0;
         }
     }
 
     @Override
     public String toString(){
-        return "ID: " + id + " | Name: " + name + " | In Stock: " + inStock + " | Price: " + price + " KZT";
+        return "ID: " + id + " | Name: " + name + " | Price: " + price;
     }
 }
