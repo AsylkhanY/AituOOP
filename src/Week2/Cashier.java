@@ -3,10 +3,19 @@ package Week2;
 public class Cashier extends Employee {
     private int registerNumber;
 
-    public Cashier(int id, String name, int salary, int experienceYears, int registerNumber) {
-        super(id, name, salary, experienceYears);
-        this.registerNumber = registerNumber;
+    public Cashier(int id, String name, int salary, int yearHired, int registerNumber) {
+        super(id, name, salary, yearHired);
+        setRegisterNumber(registerNumber);
     }
+
+    public void setRegisterNumber(int registerNumber) {
+        if(registerNumber > 0) {
+            this.registerNumber = registerNumber;
+        } else {
+            this.registerNumber = 1;
+        }
+    }
+    public int getRegisterNumber() { return registerNumber; }
 
     @Override
     public void work() {
@@ -18,12 +27,12 @@ public class Cashier extends Employee {
         return "Cashier";
     }
 
-    public void processPayment() {
-        System.out.println("Cashier " + name + " processed a payment.");
+    public void scanItem() {
+        System.out.println("Cashier " + name + " is scanning a product.");
     }
 
-    public void restockBags() {
-        System.out.println("Cashier " + name + " is restocking bags.");
+    public void processRefund() {
+        System.out.println("Cashier " + name + " is processing a refund.");
     }
 
     @Override

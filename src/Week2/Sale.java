@@ -7,27 +7,52 @@ public class Sale {
     private int cost;
 
     public Sale(int id, Product[] products, String customerName){
-        this.id = id;
-        this.products = products;
-        this.customerName = customerName;
+        setId(id);
+        setProducts(products);
+        setCustomerName(customerName);
         calculateCost();
     }
 
+    public int getId(){return id;}
+    public void setId(int id){this.id = id;}
+
+    public Product[] getProducts(){return products;}
+    public void setProducts(Product[] products){this.products = products;}
+
+    public String getCustomerName(){return customerName;}
+    public void setCustomerName(String customerName){
+        if(customerName != null && !customerName.isEmpty()) {
+            this.customerName = customerName;
+        } else {
+            this.customerName = "Unknown";
+        }
+    }
+
+    public int getCost(){
+        return calculateCost();
+    }
+
     public int calculateCost(){
-        int sum = 0;
-        if(products != null) {
-            for(Product p : products){
-                if(p != null) sum += p.getPrice();
+        int priceSum = 0;
+        if (products != null) {
+            for (Product product : products){
+                if (product != null) {
+                    priceSum += product.getPrice();
+                }
             }
         }
-        this.cost = sum;
+        this.cost = priceSum;
         return cost;
     }
 
-    public int getCost() { return cost; }
-
     @Override
     public String toString(){
-        return "Sale ID: " + id + " | Customer: " + customerName + " | Total: " + cost;
+        StringBuilder productList = new StringBuilder();
+        if (products != null) {
+            for(Product p : products){
+                if(p != null) productList.append("\n   - ").append(p.getName()).append(" (").append(p.getPrice()).append(")");
+            }
+        }
+        return "Sale ID: " + id + "\nCustomer: " + customerName + "\nProducts:" + productList.toString() + "\nTotal: " + getCost();
     }
 }

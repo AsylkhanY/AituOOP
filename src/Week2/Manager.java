@@ -3,10 +3,19 @@ package Week2;
 public class Manager extends Employee {
     private int teamSize;
 
-    public Manager(int id, String name, int salary, int experienceYears, int teamSize) {
-        super(id, name, salary, experienceYears);
-        this.teamSize = teamSize;
+    public Manager(int id, String name, int salary, int yearHired, int teamSize) {
+        super(id, name, salary, yearHired);
+        setTeamSize(teamSize);
     }
+
+    public void setTeamSize(int teamSize) {
+        if(teamSize >= 0) {
+            this.teamSize = teamSize;
+        } else {
+            this.teamSize = 0;
+        }
+    }
+    public int getTeamSize() { return teamSize; }
 
     @Override
     public void work() {
@@ -18,12 +27,12 @@ public class Manager extends Employee {
         return "Manager";
     }
 
-    public void conductMeeting() {
-        System.out.println("Manager " + name + " is conducting a team meeting.");
+    public void holdMeeting() {
+        System.out.println("Manager " + name + " is holding a team meeting.");
     }
 
     public void approveBudget() {
-        System.out.println("Manager " + name + " approved the weekly budget.");
+        System.out.println("Manager " + name + " is approving the budget.");
     }
 
     @Override

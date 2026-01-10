@@ -15,9 +15,11 @@ public class Main {
         products.add(new Product(222, "Milk", true, 450));
         products.add(new Product(333, "Eggs", true, 900));
 
-        employees.add(new Employee(101, "Baha", 200000, 2));
-        employees.add(new Cashier(102, "Adil", 300000, 4, 5));
-        employees.add(new Manager(103, "Beka", 450000, 8, 10));
+        employees.add(new Employee(101, "Baha", 200000, 2020));
+        employees.add(new Manager(102, "Beka", 450000, 2018, 5));
+        employees.add(new Cashier(103, "Adil", 300000, 2021, 1));
+
+        sales.add(new Sale(1, new Product[]{products.get(0), products.get(2)}, "Nurkhan"));
 
         boolean running = true;
         while (running) {
@@ -34,19 +36,28 @@ public class Main {
                         viewAllProducts();
                         break;
                     case 3:
-                        addEmployeeMenu();
+                        addGeneralEmployee();
                         break;
                     case 4:
-                        viewAllEmployees();
+                        addManager();
                         break;
                     case 5:
-                        demonstratePolymorphism();
+                        addCashier();
                         break;
                     case 6:
-                        viewManagersOnly();
+                        viewAllEmployees();
                         break;
                     case 7:
+                        demonstratePolymorphism();
+                        break;
+                    case 8:
+                        viewCashiersOnly();
+                        break;
+                    case 9:
                         addSale();
+                        break;
+                    case 10:
+                        viewAllSales();
                         break;
                     case 0:
                         System.out.println("\nGoodbye!");
@@ -74,11 +85,14 @@ public class Main {
         System.out.println("========================================");
         System.out.println("1. Add Product");
         System.out.println("2. View All Products");
-        System.out.println("3. Add Employee (Parent/Child)");
-        System.out.println("4. View All Employees (Polymorphic)");
-        System.out.println("5. Demonstrate Polymorphism");
-        System.out.println("6. View Managers Only (Filter)");
-        System.out.println("7. Add Sale");
+        System.out.println("3. Add General Employee (Parent)");
+        System.out.println("4. Add Manager (Child)");
+        System.out.println("5. Add Cashier (Child)");
+        System.out.println("6. View All Employees (Polymorphic)");
+        System.out.println("7. Demonstrate Polymorphism");
+        System.out.println("8. View Cashiers Only (Filter)");
+        System.out.println("9. Add Sale");
+        System.out.println("10. View All Sales");
         System.out.println("0. Exit");
         System.out.println("========================================");
         System.out.print("Enter your choice: ");
@@ -117,48 +131,78 @@ public class Main {
         }
     }
 
-    private static void addEmployeeMenu() {
-        System.out.println("\n--- ADD EMPLOYEE ---");
-        System.out.println("1. Add General Employee");
-        System.out.println("2. Add Cashier");
-        System.out.println("3. Add Manager");
-        System.out.print("Select type: ");
-        int type = scanner.nextInt();
-        scanner.nextLine();
-
-        System.out.print("Enter ID: ");
-        int id = scanner.nextInt();
-        scanner.nextLine();
-
-        System.out.print("Enter Name: ");
+    private static void addGeneralEmployee() {
+        System.out.println("\n--- ADD GENERAL EMPLOYEE ---");
+        System.out.print("Enter name: ");
         String name = scanner.nextLine();
 
-        System.out.print("Enter Salary: ");
+        System.out.print("Enter salary: ");
         int salary = scanner.nextInt();
         scanner.nextLine();
 
-        System.out.print("Enter Experience (Years): ");
-        int exp = scanner.nextInt();
+        System.out.print("Enter id: ");
+        int id = scanner.nextInt();
         scanner.nextLine();
 
-        if (type == 1) {
-            employees.add(new Employee(id, name, salary, exp));
-            System.out.println("Employee added.");
-        } else if (type == 2) {
-            System.out.print("Enter Register Number: ");
-            int reg = scanner.nextInt();
-            scanner.nextLine();
-            employees.add(new Cashier(id, name, salary, exp, reg));
-            System.out.println("Cashier added.");
-        } else if (type == 3) {
-            System.out.print("Enter Team Size: ");
-            int team = scanner.nextInt();
-            scanner.nextLine();
-            employees.add(new Manager(id, name, salary, exp, team));
-            System.out.println("Manager added.");
-        } else {
-            System.out.println("Invalid type selected.");
-        }
+        System.out.print("Enter year hired: ");
+        int year = scanner.nextInt();
+        scanner.nextLine();
+
+        Employee emp = new Employee(id, name, salary, year);
+        employees.add(emp);
+        System.out.println("\nGeneral Employee added successfully!");
+    }
+
+    private static void addManager() {
+        System.out.println("\n--- ADD MANAGER ---");
+        System.out.print("Enter name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter salary: ");
+        int salary = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Enter id: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Enter year hired: ");
+        int year = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Enter team size: ");
+        int teamSize = scanner.nextInt();
+        scanner.nextLine();
+
+        Manager manager = new Manager(id, name, salary, year, teamSize);
+        employees.add(manager);
+        System.out.println("\nManager added successfully!");
+    }
+
+    private static void addCashier() {
+        System.out.println("\n--- ADD CASHIER ---");
+        System.out.print("Enter name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter salary: ");
+        int salary = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Enter id: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Enter year hired: ");
+        int year = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Enter register number: ");
+        int registerNum = scanner.nextInt();
+        scanner.nextLine();
+
+        Cashier cashier = new Cashier(id, name, salary, year, registerNum);
+        employees.add(cashier);
+        System.out.println("\nCashier added successfully!");
     }
 
     private static void viewAllEmployees() {
@@ -167,15 +211,15 @@ public class Main {
             System.out.println("No employees found.");
             return;
         }
-        for (Employee e : employees) {
-            System.out.println(e.toString());
+        for (int i = 0; i < employees.size(); i++) {
+            System.out.println((i + 1) + ". " + employees.get(i).toString());
         }
     }
 
     private static void demonstratePolymorphism() {
         System.out.println("\n--- POLYMORPHISM DEMO ---");
         if (employees.isEmpty()) {
-            System.out.println("No employees.");
+            System.out.println("No employees to demonstrate.");
             return;
         }
         for (Employee e : employees) {
@@ -183,26 +227,30 @@ public class Main {
         }
     }
 
-    private static void viewManagersOnly() {
-        System.out.println("\n--- MANAGERS ONLY ---");
+    private static void viewCashiersOnly() {
+        System.out.println("\n--- CASHIERS ONLY ---");
         boolean found = false;
         for (Employee e : employees) {
-            if (e instanceof Manager) {
-                Manager m = (Manager) e;
-                System.out.println(m.toString());
-                m.conductMeeting();
+            if (e instanceof Cashier) {
+                Cashier c = (Cashier) e;
+                System.out.println(c.toString());
+                c.scanItem();
                 found = true;
             }
         }
-        if (!found) System.out.println("No managers found.");
+        if (!found) {
+            System.out.println("No cashiers found.");
+        }
     }
 
     private static void addSale() {
         System.out.println("\n--- ADD SALE ---");
+
         if (products.isEmpty()) {
-            System.out.println("No products available.");
+            System.out.println("Error: No products exist. Add products first.");
             return;
         }
+
         System.out.print("Enter Customer Name: ");
         String customerName = scanner.nextLine();
 
@@ -210,21 +258,49 @@ public class Main {
         int id = scanner.nextInt();
         scanner.nextLine();
 
-        System.out.print("Item count: ");
-        int count = scanner.nextInt();
+        System.out.print("How many items? ");
+        int itemCount = scanner.nextInt();
         scanner.nextLine();
 
-        Product[] items = new Product[count];
-        for(int i=0; i<count; i++){
-            System.out.print("Enter Product ID for item " + (i+1) + ": ");
-            int pid = scanner.nextInt();
+        Product[] saleProducts = new Product[itemCount];
+
+        for (int i = 0; i < itemCount; i++) {
+            viewAllProducts();
+            System.out.print("Enter ID of product #" + (i + 1) + ": ");
+            int prodId = scanner.nextInt();
             scanner.nextLine();
-            for(Product p : products){
-                if(p.getId() == pid) items[i] = p;
+
+            Product selectedProduct = null;
+            for (Product p : products) {
+                if (p.getId() == prodId) {
+                    selectedProduct = p;
+                    break;
+                }
             }
-            if(items[i] == null) items[i] = new Product();
+
+            if (selectedProduct != null) {
+                saleProducts[i] = selectedProduct;
+                System.out.println("Added " + selectedProduct.getName());
+            } else {
+                System.out.println("Product not found! Adding Empty Product.");
+                saleProducts[i] = new Product();
+            }
         }
-        sales.add(new Sale(id, items, customerName));
-        System.out.println("Sale added.");
+
+        Sale sale = new Sale(id, saleProducts, customerName);
+        sales.add(sale);
+        System.out.println("\nSale completed! Total: " + sale.getCost());
+    }
+
+    private static void viewAllSales() {
+        System.out.println("\n--- ALL SALES ---");
+        if (sales.isEmpty()) {
+            System.out.println("No sales history.");
+            return;
+        }
+        for (Sale sale : sales) {
+            System.out.println(sale.toString());
+            System.out.println("-------------------------");
+        }
     }
 }
