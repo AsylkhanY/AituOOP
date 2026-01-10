@@ -7,60 +7,44 @@ public class Employee {
     private int salary;
 
     public Employee(int id, String name, JobPosition jobPosition, int salary){
-        this.id = id;
-        this.name = name;
-        this.jobPosition = jobPosition;
-        this.salary = salary;
+        setId(id);
+        setName(name);
+        setJobPosition(jobPosition);
+        setSalary(salary);
     }
 
     public void setId(int id){this.id = id;}
-
     public int getId(){return id;}
 
     public void setName(String name){this.name = name;}
-
     public String getName(){return name;}
 
     public void setJobPosition(JobPosition jobPosition){
         if(jobPosition != JobPosition.None) {
             this.jobPosition = jobPosition;
-        }
-        else{
-            System.out.println("Warning! You can not set job position as NONE");
+        } else {
+            System.out.println("Warning! Cannot set job position as NONE");
+            this.jobPosition = JobPosition.Janitor; // Default backup
         }
     }
-
     public JobPosition getJobPosition(){return jobPosition;}
 
     public void setSalary(int salary){
-        if(salary > 0) {
+        if(salary >= 0) {
             this.salary = salary;
-        }
-        else{
-            System.out.println("Warning! You can not set negative or zero salary");
+        } else {
+            System.out.println("Warning! Salary cannot be negative.");
+            this.salary = 0;
         }
     }
-
     public int getSalary(){return salary;}
 
-    public float getSalaryAfterTax(int taxPercent){
-        return salary * (1 - (taxPercent)/100f);
-    }
-
-    public void addBonus(int bonusPercent) {
-        salary += salary * bonusPercent / 100;
-    }
-
     public enum JobPosition{
-        Janitor,
-        Cashier,
-        Manager,
-        Security,
-        None
+        Janitor, Cashier, Manager, Security, None
     }
 
     @Override
     public String toString(){
-        return "ID:" + id + " Name:" + name + " Position:" + jobPosition.toString();
+        return "ID: " + id + " | Name: " + name + " | Position: " + jobPosition + " | Salary: " + salary;
     }
 }
