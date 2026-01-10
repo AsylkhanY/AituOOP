@@ -1,6 +1,8 @@
 package Week2;
 
 import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Sale {
     private int id;

@@ -46,7 +46,7 @@ public class Product {
             this.price = price;
         }
         else{
-            System.out.println("Warning! Name can not be negative or zero");
+            System.out.println("Warning! Price can not be negative or zero");
         }
     }
 
