@@ -7,60 +7,44 @@ public class Product {
     private int price;
 
     public Product(int id, String name, boolean inStock, int price){
-        this.id = id;
-        this.name = name;
-        this.inStock = inStock;
-        this.price = price;
+        setId(id);
+        setName(name);
+        setInStock(inStock);
+        setPrice(price);
     }
 
     public Product() {
-        this.id = 0;
-        this.name = "Empty Product";
-        this.inStock = false;
-        this.price = 0;
+        this(0, "Empty Product", false, 0);
     }
 
     public int getId(){return id;}
-
     public void setId(int id){this.id = id;}
 
     public String getName(){return name;}
-
     public void setName(String name){
-        if(!name.isEmpty()) {
+        if(name != null && !name.isEmpty()) {
             this.name = name;
-        }
-        else{
-            System.out.println("Warning! Name can not be empty");
+        } else {
+            System.out.println("Warning! Name cannot be empty. Setting to Unknown.");
+            this.name = "Unknown";
         }
     }
 
     public boolean isInStock(){return inStock;}
-
     public void setInStock(boolean inStock){this.inStock = inStock;}
 
     public int getPrice(){return price;}
-
     public void setPrice(int price){
-        if(price > 0) {
+        if(price >= 0) {
             this.price = price;
+        } else {
+            System.out.println("Warning! Price cannot be negative. Setting to 0.");
+            this.price = 0;
         }
-        else{
-            System.out.println("Warning! Price can not be negative or zero");
-        }
-    }
-
-    public float getPriceAfterDiscount(int discountPercent){
-        return price - getDiscountAmount(discountPercent);
-    }
-
-    public float getDiscountAmount(int discountPercent){
-        return price * discountPercent / 100;
     }
 
     @Override
     public String toString(){
-        return "ID:" + id + " Name:" + name + " In stock:" + inStock + " Price:" + price;
+        return "ID: " + id + " | Name: " + name + " | In Stock: " + inStock + " | Price: " + price + " KZT";
     }
-
 }
