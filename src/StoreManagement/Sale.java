@@ -1,4 +1,4 @@
-package Week2;
+package StoreManagement;
 
 public class Sale {
     private int id;
@@ -41,6 +41,7 @@ public class Sale {
                 }
             }
         }
+
         this.cost = priceSum;
         return cost;
     }

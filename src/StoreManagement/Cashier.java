@@ -1,4 +1,4 @@
-package Week2;
+package StoreManagement;
 
 public class Cashier extends Employee {
     private int registerNumber;
