@@ -1,5 +1,7 @@
 package StoreManagement;
 
+import StoreManagement.model.Product;
+
 public class Sale {
     private int id;
     private Product[] products;

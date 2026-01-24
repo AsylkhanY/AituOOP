@@ -1,6 +1,6 @@
-package StoreManagement;
+package StoreManagement.model;
 
-public class Employee {
+public abstract class Employee {
     protected int id;
     protected String name;
     protected int salary;
@@ -37,25 +37,21 @@ public class Employee {
     public int getSalary(){return salary;}
 
     public void setYearHired(int yearHired) {
-        if(yearHired > 1900 && yearHired <= 2025) {
+        if(yearHired > 1900 && yearHired <= 2026) {
             this.yearHired = yearHired;
         } else {
             System.out.println("Warning! Invalid year.");
-            this.yearHired = 2024;
+            this.yearHired = 2026;
         }
     }
     public int getYearHired() { return yearHired; }
 
-    public void work() {
-        System.out.println(name + " is performing general tasks.");
-    }
+    public abstract void work();
 
-    public String getRole() {
-        return "General Staff";
-    }
+    public abstract String getRole();
 
     public boolean isLongTermEmployee() {
-        return (2024 - yearHired) > 5;
+        return (2026 - yearHired) > 5;
     }
 
     @Override

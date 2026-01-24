@@ -1,4 +1,4 @@
-package StoreManagement;
+package StoreManagement.model;
 
 public class Manager extends Employee {
     private int teamSize;

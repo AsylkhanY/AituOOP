@@ -1,7 +1,7 @@
 package StoreManagement;
 
-import StoreManagement.Menu.Menu;
-import StoreManagement.Menu.StoreMenu;
+import StoreManagement.menu.Menu;
+import StoreManagement.menu.StoreMenu;
 
 public class Main {
     public static void main(String[] args) {

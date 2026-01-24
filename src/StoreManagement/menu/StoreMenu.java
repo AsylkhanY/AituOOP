@@ -1,6 +1,10 @@
-package StoreManagement.Menu;
+package StoreManagement.menu;
 
 import StoreManagement.*;
+import StoreManagement.model.Cashier;
+import StoreManagement.model.Employee;
+import StoreManagement.model.Manager;
+import StoreManagement.model.Product;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -21,7 +25,6 @@ public class StoreMenu implements Menu{
             products.add(new Product(222, "Milk", true, 450));
             products.add(new Product(333, "Eggs", true, 900));
 
-            employees.add(new Employee(101, "Baha", 200000, 2020));
             employees.add(new Manager(102, "Beka", 450000, 2018, 5));
             employees.add(new Cashier(103, "Adil", 300000, 2021, 1));
 
@@ -39,14 +42,13 @@ public class StoreMenu implements Menu{
         System.out.println("========================================");
         System.out.println("1. Add Product");
         System.out.println("2. View All Products");
-        System.out.println("3. Add General Employee (Parent)");
-        System.out.println("4. Add Manager (Child)");
-        System.out.println("5. Add Cashier (Child)");
-        System.out.println("6. View All Employees (Polymorphic)");
-        System.out.println("7. Demonstrate Polymorphism");
-        System.out.println("8. View Cashiers Only (Filter)");
-        System.out.println("9. Add Sale");
-        System.out.println("10. View All Sales");
+        System.out.println("3. Add Manager (Child)");
+        System.out.println("4. Add Cashier (Child)");
+        System.out.println("5. View All Employees (Polymorphic)");
+        System.out.println("6. Demonstrate Polymorphism");
+        System.out.println("7. View Cashiers Only (Filter)");
+        System.out.println("8. Add Sale");
+        System.out.println("9. View All Sales");
         System.out.println("0. Exit");
         System.out.println("========================================");
         System.out.print("Enter your choice: ");
@@ -70,27 +72,24 @@ public class StoreMenu implements Menu{
                             viewAllProducts();
                             break;
                         case 3:
-                            addGeneralEmployee();
-                            break;
-                        case 4:
                             addManager();
                             break;
-                        case 5:
+                        case 4:
                             addCashier();
                             break;
-                        case 6:
+                        case 5:
                             viewAllEmployees();
                             break;
-                        case 7:
+                        case 6:
                             demonstratePolymorphism();
                             break;
-                        case 8:
+                        case 7:
                             viewCashiersOnly();
                             break;
-                        case 9:
+                        case 8:
                             addSale();
                             break;
-                        case 10:
+                        case 9:
                             viewAllSales();
                             break;
                         case 0:
@@ -157,35 +156,6 @@ public class StoreMenu implements Menu{
         }
         for (int i = 0; i < products.size(); i++) {
             System.out.println((i + 1) + ". " + products.get(i).toString());
-        }
-    }
-
-    private void addGeneralEmployee() {
-        try {
-            System.out.println("\n--- ADD GENERAL EMPLOYEE ---");
-            System.out.print("Enter name: ");
-            String name = scanner.nextLine();
-
-            System.out.print("Enter salary: ");
-            int salary = scanner.nextInt();
-            scanner.nextLine();
-
-            System.out.print("Enter id: ");
-            int id = scanner.nextInt();
-            scanner.nextLine();
-
-            System.out.print("Enter year hired: ");
-            int year = scanner.nextInt();
-            scanner.nextLine();
-
-            Employee emp = new Employee(id, name, salary, year);
-            employees.add(emp);
-            System.out.println("\nGeneral Employee added successfully!");
-        }catch (java.util.InputMismatchException e) {
-            System.out.println("❌ Error: Invalid input type!");
-            scanner.nextLine();
-        } catch (IllegalArgumentException e) {
-            System.out.println("❌ Validation Error: " + e.getMessage());
         }
     }
 

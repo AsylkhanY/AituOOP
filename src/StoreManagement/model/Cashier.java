@@ -1,4 +1,4 @@
-package StoreManagement;
+package StoreManagement.model;
 
 public class Cashier extends Employee {
     private int registerNumber;

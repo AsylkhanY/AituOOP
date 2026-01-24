@@ -1,4 +1,4 @@
-package StoreManagement.Menu;
+package StoreManagement.menu;
 
 public interface Menu {
     void displayMenu();
