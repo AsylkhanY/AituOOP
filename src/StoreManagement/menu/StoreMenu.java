@@ -1,42 +1,40 @@
 package StoreManagement.menu;
 
-import StoreManagement.*;
-import StoreManagement.model.Cashier;
-import StoreManagement.model.Employee;
-import StoreManagement.model.Manager;
-import StoreManagement.model.Product;
+import StoreManagement.Sale;
+import StoreManagement.model.*; // Imports Product, Employee, Manager, Cashier, Discountable
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class StoreMenu implements Menu{
+public class StoreMenu implements Menu {
     private ArrayList<Product> products;
     private ArrayList<Employee> employees;
     private ArrayList<Sale> sales;
 
     private static Scanner scanner = new Scanner(System.in);
 
-    public StoreMenu(){
+    public StoreMenu() {
         this.products = new ArrayList<>();
         this.employees = new ArrayList<>();
         this.sales = new ArrayList<>();
         try {
+            // Initial Test Data
             products.add(new Product(111, "Bread", true, 300));
             products.add(new Product(222, "Milk", true, 450));
             products.add(new Product(333, "Eggs", true, 900));
+            products.add(new Product(444, "Premium Steak", true, 5000)); // Added expensive item to test promotion
 
             employees.add(new Manager(102, "Beka", 450000, 2018, 5));
             employees.add(new Cashier(103, "Adil", 300000, 2021, 1));
 
             sales.add(new Sale(1, new Product[]{products.get(0), products.get(2)}, "Nurkhan"));
-        }
-        catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println("Error initializing test data: " + e.getMessage());
         }
     }
 
     @Override
-    public void displayMenu(){
+    public void displayMenu() {
         System.out.println("\n========================================");
         System.out.println(" GROCERY STORE MANAGEMENT SYSTEM");
         System.out.println("========================================");
@@ -49,20 +47,21 @@ public class StoreMenu implements Menu{
         System.out.println("7. View Cashiers Only (Filter)");
         System.out.println("8. Add Sale");
         System.out.println("9. View All Sales");
+        System.out.println("10. Check Discounts & Promotions (Interface)"); // NEW OPTION
         System.out.println("0. Exit");
         System.out.println("========================================");
         System.out.print("Enter your choice: ");
     }
 
     @Override
-    public void run(){
+    public void run() {
         boolean running = true;
         while (running) {
             displayMenu();
             try {
                 if (scanner.hasNextInt()) {
                     int choice = scanner.nextInt();
-                    scanner.nextLine();
+                    scanner.nextLine(); // Consume newline
 
                     switch (choice) {
                         case 1:
@@ -92,6 +91,9 @@ public class StoreMenu implements Menu{
                         case 9:
                             viewAllSales();
                             break;
+                        case 10:
+                            checkDiscounts(); // NEW METHOD CALL
+                            break;
                         case 0:
                             System.out.println("\nGoodbye!");
                             running = false;
@@ -108,7 +110,7 @@ public class StoreMenu implements Menu{
                     System.out.println("\nPress Enter to continue...");
                     scanner.nextLine();
                 }
-            }catch (java.util.InputMismatchException e) {
+            } catch (java.util.InputMismatchException e) {
                 System.out.println("❌ Error: Please enter a valid number!");
                 scanner.nextLine();
             } catch (Exception e) {
@@ -117,6 +119,39 @@ public class StoreMenu implements Menu{
             }
         }
         scanner.close();
+    }
+
+    // --- NEW METHOD FOR INTERFACE DEMONSTRATION ---
+    private void checkDiscounts() {
+        System.out.println("\n--- PRODUCT DISCOUNTS & PROMOTIONS ---");
+        if (products.isEmpty()) {
+            System.out.println("No products found.");
+            return;
+        }
+
+        System.out.print("Enter a test discount percentage (e.g. 10): ");
+        double percent = 0;
+        try {
+            percent = scanner.nextDouble();
+            scanner.nextLine();
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("Invalid number using default 0%.");
+            scanner.nextLine();
+        }
+
+        System.out.println("\nApplying " + percent + "% discount to all items:");
+        System.out.println("------------------------------------------------");
+
+        for (Product p : products) {
+            // Check if object implements interface (Good practice, though Product always does here)
+            if (p instanceof Discountable) {
+                System.out.println("Product: " + p.getName());
+                System.out.println("Original Price: " + p.getPrice() + " KZT");
+                System.out.println("Status: " + p.getPromotionDetails());
+                System.out.println("Discounted Price: " + p.getDiscountedPrice(percent) + " KZT");
+                System.out.println("------------------------------------------------");
+            }
+        }
     }
 
     private void addProduct() {
@@ -140,7 +175,7 @@ public class StoreMenu implements Menu{
             Product item = new Product(id, name, available, price);
             products.add(item);
             System.out.println("\nProduct added successfully!");
-        }catch (java.util.InputMismatchException e) {
+        } catch (java.util.InputMismatchException e) {
             System.out.println("❌ Error: Invalid input type!");
             scanner.nextLine();
         } catch (IllegalArgumentException e) {
@@ -184,7 +219,7 @@ public class StoreMenu implements Menu{
             Manager manager = new Manager(id, name, salary, year, teamSize);
             employees.add(manager);
             System.out.println("\nManager added successfully!");
-        }catch (java.util.InputMismatchException e) {
+        } catch (java.util.InputMismatchException e) {
             System.out.println("❌ Error: Invalid input type!");
             scanner.nextLine();
         } catch (IllegalArgumentException e) {
@@ -217,7 +252,7 @@ public class StoreMenu implements Menu{
             Cashier cashier = new Cashier(id, name, salary, year, registerNum);
             employees.add(cashier);
             System.out.println("\nCashier added successfully!");
-        }catch (java.util.InputMismatchException e) {
+        } catch (java.util.InputMismatchException e) {
             System.out.println("❌ Error: Invalid input type!");
             scanner.nextLine();
         } catch (IllegalArgumentException e) {
@@ -311,7 +346,7 @@ public class StoreMenu implements Menu{
             Sale sale = new Sale(id, saleProducts, customerName);
             sales.add(sale);
             System.out.println("\nSale completed! Total: " + sale.getCost());
-        }catch (java.util.InputMismatchException e) {
+        } catch (java.util.InputMismatchException e) {
             System.out.println("❌ Error: Invalid input type!");
             scanner.nextLine();
         } catch (IllegalArgumentException e) {
