@@ -1,7 +1,7 @@
 package StoreManagement.menu;
 
 import StoreManagement.Sale;
-import StoreManagement.model.*; // Imports Product, Employee, Manager, Cashier, Discountable
+import StoreManagement.model.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -18,11 +18,10 @@ public class StoreMenu implements Menu {
         this.employees = new ArrayList<>();
         this.sales = new ArrayList<>();
         try {
-            // Initial Test Data
             products.add(new Product(111, "Bread", true, 300));
             products.add(new Product(222, "Milk", true, 450));
             products.add(new Product(333, "Eggs", true, 900));
-            products.add(new Product(444, "Premium Steak", true, 5000)); // Added expensive item to test promotion
+            products.add(new Product(444, "Premium Steak", true, 5000));
 
             employees.add(new Manager(102, "Beka", 450000, 2018, 5));
             employees.add(new Cashier(103, "Adil", 300000, 2021, 1));
@@ -92,7 +91,7 @@ public class StoreMenu implements Menu {
                             viewAllSales();
                             break;
                         case 10:
-                            checkDiscounts(); // NEW METHOD CALL
+                            checkDiscounts();
                             break;
                         case 0:
                             System.out.println("\nGoodbye!");
@@ -120,8 +119,6 @@ public class StoreMenu implements Menu {
         }
         scanner.close();
     }
-
-    // --- NEW METHOD FOR INTERFACE DEMONSTRATION ---
     private void checkDiscounts() {
         System.out.println("\n--- PRODUCT DISCOUNTS & PROMOTIONS ---");
         if (products.isEmpty()) {
@@ -143,7 +140,6 @@ public class StoreMenu implements Menu {
         System.out.println("------------------------------------------------");
 
         for (Product p : products) {
-            // Check if object implements interface (Good practice, though Product always does here)
             if (p instanceof Discountable) {
                 System.out.println("Product: " + p.getName());
                 System.out.println("Original Price: " + p.getPrice() + " KZT");
