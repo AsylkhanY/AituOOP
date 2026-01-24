@@ -13,36 +13,35 @@ public abstract class Employee {
         setYearHired(yearHired);
     }
 
-    public void setId(int id){this.id = id;}
+    public void setId(int id){
+        if(id < 0){
+            throw new IllegalArgumentException("Enter a positive integer!");
+        }
+        this.id = id;
+    }
     public int getId(){return id;}
 
     public void setName(String name){
-        if(name != null && !name.isEmpty()) {
-            this.name = name;
-        } else {
-            System.out.println("Warning! Name cannot be empty.");
-            this.name = "Unknown";
+        if(name == null || name.isEmpty()){
+            throw new IllegalArgumentException("Name cannot be empty!");
         }
+        this.name = name;
     }
     public String getName(){return name;}
 
-    public void setSalary(int salary){
-        if(salary >= 0) {
-            this.salary = salary;
-        } else {
-            System.out.println("Warning! Salary cannot be negative.");
-            this.salary = 0;
+    public void setSalary(int salary) {
+        if (salary < 0) {
+            throw new IllegalArgumentException("Salary cannot be negative");
         }
+        this.salary = salary;
     }
     public int getSalary(){return salary;}
 
-    public void setYearHired(int yearHired) {
-        if(yearHired > 1900 && yearHired <= 2026) {
-            this.yearHired = yearHired;
-        } else {
-            System.out.println("Warning! Invalid year.");
-            this.yearHired = 2026;
+    public void setYearHired(int yearHired){
+        if(yearHired < 1900 || yearHired > 2026){
+            throw new IllegalArgumentException("Enter valid year!");
         }
+        this.yearHired = yearHired;
     }
     public int getYearHired() { return yearHired; }
 

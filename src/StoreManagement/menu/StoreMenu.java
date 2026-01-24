@@ -1,6 +1,7 @@
 package StoreManagement.menu;
 
 import StoreManagement.Sale;
+import StoreManagement.exception.InvalidInputException;
 import StoreManagement.model.*;
 
 import java.util.ArrayList;
@@ -100,7 +101,8 @@ public class StoreMenu implements Menu {
                         default:
                             System.out.println("\nInvalid choice!");
                     }
-                } else {
+                }
+                else {
                     System.out.println("\nPlease enter a number.");
                     scanner.nextLine();
                 }
@@ -110,10 +112,10 @@ public class StoreMenu implements Menu {
                     scanner.nextLine();
                 }
             } catch (java.util.InputMismatchException e) {
-                System.out.println("❌ Error: Please enter a valid number!");
+                System.out.println("Error: Please enter a valid number!");
                 scanner.nextLine();
             } catch (Exception e) {
-                System.out.println("❌ Error: " + e.getMessage());
+                System.out.println("Error: " + e.getMessage());
                 scanner.nextLine();
             }
         }
@@ -172,10 +174,10 @@ public class StoreMenu implements Menu {
             products.add(item);
             System.out.println("\nProduct added successfully!");
         } catch (java.util.InputMismatchException e) {
-            System.out.println("❌ Error: Invalid input type!");
+            System.out.println("Error: Invalid input type!");
             scanner.nextLine();
         } catch (IllegalArgumentException e) {
-            System.out.println("❌ Validation Error: " + e.getMessage());
+            System.out.println("Validation Error: " + e.getMessage());
         }
     }
 
@@ -216,10 +218,10 @@ public class StoreMenu implements Menu {
             employees.add(manager);
             System.out.println("\nManager added successfully!");
         } catch (java.util.InputMismatchException e) {
-            System.out.println("❌ Error: Invalid input type!");
+            System.out.println("Error: Invalid input type!");
             scanner.nextLine();
         } catch (IllegalArgumentException e) {
-            System.out.println("❌ Validation Error: " + e.getMessage());
+            System.out.println("Validation Error: " + e.getMessage());
         }
     }
 
@@ -249,10 +251,10 @@ public class StoreMenu implements Menu {
             employees.add(cashier);
             System.out.println("\nCashier added successfully!");
         } catch (java.util.InputMismatchException e) {
-            System.out.println("❌ Error: Invalid input type!");
+            System.out.println("Error: Invalid input type!");
             scanner.nextLine();
         } catch (IllegalArgumentException e) {
-            System.out.println("❌ Validation Error: " + e.getMessage());
+            System.out.println("Validation Error: " + e.getMessage());
         }
     }
 
@@ -306,6 +308,10 @@ public class StoreMenu implements Menu {
             System.out.print("Enter Customer Name: ");
             String customerName = scanner.nextLine();
 
+            if(customerName.length() < 2){
+                throw new InvalidInputException("Name can not be less than 2 letters!");
+            }
+
             System.out.print("Enter Sale ID: ");
             int id = scanner.nextInt();
             scanner.nextLine();
@@ -343,10 +349,12 @@ public class StoreMenu implements Menu {
             sales.add(sale);
             System.out.println("\nSale completed! Total: " + sale.getCost());
         } catch (java.util.InputMismatchException e) {
-            System.out.println("❌ Error: Invalid input type!");
+            System.out.println("Error: Invalid input type!");
             scanner.nextLine();
         } catch (IllegalArgumentException e) {
-            System.out.println("❌ Validation Error: " + e.getMessage());
+            System.out.println("Validation Error: " + e.getMessage());
+        } catch (InvalidInputException e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
