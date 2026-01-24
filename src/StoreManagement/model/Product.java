@@ -1,6 +1,6 @@
 package StoreManagement.model;
 
-public class Product {
+public class Product implements Discountable{
     private int id;
     private String name;
     private boolean inStock;
@@ -38,6 +38,23 @@ public class Product {
             this.price = price;
         } else {
             this.price = 0;
+        }
+    }
+
+    @Override
+    public double getDiscountedPrice(double percentage) {
+        if (percentage < 0 || percentage > 100) {
+            return price;
+        }
+        return price - (price * (percentage / 100.0));
+    }
+
+    @Override
+    public String getPromotionDetails() {
+        if (price > 1000) {
+            return "Premium Product: Eligible for 10% Gold Discount";
+        } else {
+            return "Standard Product: Standard rates apply";
         }
     }
 
