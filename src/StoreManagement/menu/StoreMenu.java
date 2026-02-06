@@ -153,42 +153,43 @@ public class StoreMenu implements Menu {
     }
 
     private void addProduct() {
-        try {
-            System.out.println("\n--- ADD PRODUCT ---");
-            System.out.print("Enter product name: ");
-            String name = scanner.nextLine();
-
-            System.out.print("Enter price (KZT): ");
-            int price = scanner.nextInt();
-            scanner.nextLine();
-
-            System.out.print("Enter id: ");
+        try{
+            System.out.println("\n--- Add Product ---");
+            System.out.println("Enter ID: ");
             int id = scanner.nextInt();
             scanner.nextLine();
 
-            System.out.print("Is available? (true/false): ");
-            boolean available = scanner.nextBoolean();
+            System.out.println("Enter name: ");
+            String name = scanner.nextLine();
+
+            System.out.println("Is available:");
+            boolean inStock = scanner.nextBoolean();
             scanner.nextLine();
 
-            Product item = new Product(id, name, available, price);
-            products.add(item);
-            System.out.println("\nProduct added successfully!");
-        } catch (java.util.InputMismatchException e) {
-            System.out.println("Error: Invalid input type!");
+            System.out.println("Enter price:");
+            int price = scanner.nextInt();
             scanner.nextLine();
-        } catch (IllegalArgumentException e) {
-            System.out.println("Validation Error: " + e.getMessage());
+
+            Product product = new Product(id, name, inStock, price);
+            products.add(product);
+            System.out.println("Product added successfully");
+        }
+        catch (java.util.InputMismatchException e){
+            System.out.println("Error mismatch");
+        }
+        catch (IllegalArgumentException e){
+            System.out.println("Illegal argument");
         }
     }
 
     private void viewAllProducts() {
-        System.out.println("\n--- ALL PRODUCTS ---");
-        if (products.isEmpty()) {
-            System.out.println("No products found.");
+        System.out.println("ALL PRODUCTS");
+        if(products.isEmpty()){
+            System.out.println("No products");
             return;
         }
-        for (int i = 0; i < products.size(); i++) {
-            System.out.println((i + 1) + ". " + products.get(i).toString());
+        for(Product p : products){
+            System.out.println(p.toString());
         }
     }
 
@@ -258,14 +259,14 @@ public class StoreMenu implements Menu {
         }
     }
 
-    private void viewAllEmployees() {
-        System.out.println("\n--- ALL EMPLOYEES ---");
-        if (employees.isEmpty()) {
-            System.out.println("No employees found.");
+    private void viewAllEmployees(){
+        System.out.println("ALL EMPLOYEES");
+        if(employees.isEmpty()){
+            System.out.println("No emplyees");
             return;
         }
-        for (int i = 0; i < employees.size(); i++) {
-            System.out.println((i + 1) + ". " + employees.get(i).toString());
+        for(Employee e : employees){
+                System.out.println(e.toString());
         }
     }
 
